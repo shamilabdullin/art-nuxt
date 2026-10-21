@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
-    <NuxtRouteAnnouncer />
-    <h1 class="title">Art — галерея мирового искусства</h1>
-  </div>
+  <NuxtLayout>
+    <div class="container">
+      <NuxtRouteAnnouncer />
+      <NuxtPage />
+    </div>
+  </NuxtLayout>
 </template>
 
 <style lang="scss" scoped>
