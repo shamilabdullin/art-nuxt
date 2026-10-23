@@ -1,19 +1,17 @@
-<template>
-    <div>
-      Главная
-    </div>
-</template>
+<script setup lang="ts">
 
-<script>
-export default {
-  setup () {
-      
-
-    return {}
-  }
-}
 </script>
 
-<style lang="scss" scoped>
+<template>
+  <div class="index">
+    <h1 class="title">Art — галерея мирового искусства</h1>
+  </div>
+</template>
 
+<style lang="scss" scoped>
+.index {
+  .title {
+    color: var(--color-accent);
+  }
+}
 </style>

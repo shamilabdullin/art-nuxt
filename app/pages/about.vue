@@ -1,19 +1,15 @@
-<template>
-    <div>
-      About page
-    </div>
-</template>
+<script setup lang="ts">
 
-<script>
-export default {
-  setup () {
-      
-
-    return {}
-  }
-}
 </script>
 
-<style lang="scss" scoped>
+<template>
+  <div class="about">
+    About
+  </div>
+</template>
 
+<style lang="scss" scoped>
+.about {
+
+}
 </style>
