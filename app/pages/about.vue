@@ -1,9 +1,11 @@
 <script setup lang="ts">
   useSeoMeta({
     title: 'Обо мне',
-    description: 'Pet-проект Шамиля Абдуллина: каталог картин из коллекции Института искусств Чикаго',
+    description:
+      'Pet-проект Шамиля Абдуллина: каталог картин из коллекции Института искусств Чикаго',
     ogTitle: 'Обо мне',
-    ogDescription: 'Pet-проект Шамиля Абдуллина: каталог картин из коллекции Института искусств Чикаго'
+    ogDescription:
+      'Pet-проект Шамиля Абдуллина: каталог картин из коллекции Института искусств Чикаго',
   })
 </script>
 
@@ -12,7 +14,7 @@
     <h1 class="title">Обо мне</h1>
 
     <div class="photoWrapper">
-      <img src="/avatar.jpg" alt="avatar" class="photo" width="380" height="380"/>
+      <img src="/avatar.jpg" alt="avatar" class="photo" width="380" height="380" />
     </div>
 
     <div class="content">
@@ -25,35 +27,35 @@
 </template>
 
 <style lang="scss" scoped>
-.wrapper {
-  max-width: 720px;
-  padding-block: 40px 80px;
-  margin-inline: auto;
+  .wrapper {
+    max-width: 720px;
+    padding-block: 40px 80px;
+    margin-inline: auto;
 
-  .title {
-    margin-bottom: 24px;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-text);
+    .title {
+      margin-bottom: 24px;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-text);
 
-    @include tablet {
-      font-size: 36px;
+      @include tablet {
+        font-size: 36px;
+      }
+    }
+
+    .photoWrapper {
+      .photo {
+        object-fit: cover;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-text);
     }
   }
-
-  .photoWrapper {
-    .photo {
-      object-fit: cover;
-    }
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--color-text);
-  }
-}
 </style>

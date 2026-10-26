@@ -1,14 +1,10 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="paintings">
-    Paintings
-  </div>
+  <div class="paintings">Paintings</div>
 </template>
 
 <style lang="scss" scoped>
-.paintings {
-}
+  .paintings {
+  }
 </style>

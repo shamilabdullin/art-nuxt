@@ -1,7 +1,7 @@
 // Цветовые токены темы. Значения — CSS custom properties, поэтому их можно
 // менять во время выполнения (переключение темы) без пересборки стилей.
 :root,
-[data-theme="light"] {
+[data-theme='light'] {
   --color-bg: #ffffff;
   --color-bg-elevated: #f7f6f4;
   --color-bg-hover: #efeeec;
@@ -17,7 +17,7 @@
   --color-skeleton: #eae7e2;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --color-bg: #17130f;
   --color-bg-elevated: #221d18;
   --color-bg-hover: #2b241d;

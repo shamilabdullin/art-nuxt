@@ -1,14 +1,10 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="search">
-    search
-  </div>
+  <div class="search">search</div>
 </template>
 
 <style lang="scss" scoped>
-.search {
-}
+  .search {
+  }
 </style>

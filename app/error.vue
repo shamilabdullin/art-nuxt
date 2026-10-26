@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { NuxtError } from '#app';
+  import type { NuxtError } from '#app'
 
   const props = defineProps<{ error: NuxtError }>()
   const isNotFoundError = computed(() => props.error.status === 404)
@@ -20,6 +20,6 @@
 </template>
 
 <style lang="scss" scoped>
-.error {
-}
+  .error {
+  }
 </style>

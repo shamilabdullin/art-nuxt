@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="index">
@@ -9,9 +7,9 @@
 </template>
 
 <style lang="scss" scoped>
-.index {
-  .title {
-    color: var(--color-accent);
+  .index {
+    .title {
+      color: var(--color-accent);
+    }
   }
-}
 </style>

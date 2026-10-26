@@ -5,15 +5,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/styles/globals.scss'],
   routeRules: {
-    '/about': { prerender: true }
+    '/about': { prerender: true },
   },
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
           additionalData: '@use "~/assets/styles" as *;',
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 })

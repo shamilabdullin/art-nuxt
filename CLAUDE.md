@@ -4,6 +4,7 @@
 Эталонная реализация лежит рядом: `../art-v2.0`.
 
 ## Учебный контекст
+
 Файлы ниже есть только на машине автора; на других машинах импорты просто не найдутся.
 
 @~/Desktop/RoadToDream/CLAUDE.md
@@ -14,8 +15,11 @@
 - После каждого шага обновить в RoadToDream: статус и журнал в `19-nuxt/projects/art-nuxt.md`, уровни подтем в `18-vue/README.md` и `19-nuxt/README.md` (только по итогам проверки), запись в `PROGRESS.md`, конспект в `theory/` при найденном пробеле. Затем предложить два коммита: код — здесь, прогресс — в RoadToDream.
 
 ## Стек и соглашения
+
 - Nuxt 4: `app/` — код приложения, `server/` — серверная часть (Nitro), `shared/` — общее для app и server, `public/` — статика.
 - Vue 3.5, TypeScript, Composition API, `<script setup lang="ts">`; стили — SCSS.
+- Форматирование — Prettier (`.prettierrc`: 100 символов, без `;`, одинарные кавычки), при сохранении в VS Code;
+  ESLint — качество кода (`eslint-config-prettier` отключает его правила форматирования). `npm run format`, `npm run lint`.
 - Структура — соглашения Nuxt (не FSD): компоненты сгруппированы по доменам, автоимпорт по пути —
   `app/components/painting/PaintingCard.vue` → `<PaintingCard>`.
 - API Nuxt меняется между версиями: сверяться с https://nuxt.com/docs, а не с памятью.

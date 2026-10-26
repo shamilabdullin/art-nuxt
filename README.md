@@ -5,6 +5,7 @@ Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduct
 ## Шпаргалка по разработке
 
 ### Каркас `.vue`-файла — сниппет `vsfc`
+
 В пустом `.vue`-файле набрать `vsfc` и нажать `Tab`:
 
 ```vue

@@ -4,11 +4,7 @@
 </script>
 
 <template>
-  <div class="artists">
-    Художник {{ id }}
-  </div>
+  <div class="artists">Художник {{ id }}</div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

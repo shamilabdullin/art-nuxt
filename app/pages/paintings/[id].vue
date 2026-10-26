@@ -2,7 +2,10 @@
   const route = useRoute()
   const id = computed(() => route.params.id)
 
-  const { data, status, error } = await useFetch<ApiSingleResponse<ArtworkDetails>>(() => `artworks/${id.value}`, { baseURL: API_BASE_URL, query: { fields: ARTWORK_DETAILS_FIELDS } })
+  const { data, status, error } = await useFetch<ApiSingleResponse<ArtworkDetails>>(
+    () => `artworks/${id.value}`,
+    { baseURL: API_BASE_URL, query: { fields: ARTWORK_DETAILS_FIELDS } },
+  )
 </script>
 
 <template>
@@ -12,6 +15,4 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
