@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <div class="wrapper">
+  <div v-if="artwork" class="wrapper">
     <div class="imageColumn">
       <div class="imageWrapper">
         <!-- <img class="image" /> -->
@@ -25,23 +25,24 @@
 
     <div class="infoColumn">
       <div>
-        <h1 class="title">{{ artwork?.title }}</h1>
+        <h1 class="title">{{ artwork.title }}</h1>
 
-        <p v-if="artwork?.artist_title" class="subtitle">
+        <p v-if="artwork.artist_title" class="subtitle">
           <NuxtLink
-            v-if="artwork?.artist_id"
+            v-if="artwork.artist_id"
             :to="`/artists/${artwork?.artist_id}`"
             class="artistLink"
-            >{{ artwork?.artist_title }}</NuxtLink
+            >{{ artwork.artist_title }}</NuxtLink
           >
-          <template v-else>{{ artwork?.artist_title }}</template>
-          <template v-if="artwork?.date_display">, {{ artwork?.date_display }}</template>
+          <template v-else>{{ artwork.artist_title }}</template>
+          <template v-if="artwork.date_display">, {{ artwork.date_display }}</template>
         </p>
       </div>
 
-      <div v-if="artwork?.description">
+      <div v-if="artwork.description">
         <p class="sectionTitle">Об этой картине</p>
-        <div class="description" v-html="artwork?.description"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -- все четко -->
+        <div class="description" v-html="artwork.description"></div>
       </div>
 
       <div v-if="metaRows.length > 0">
