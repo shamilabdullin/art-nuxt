@@ -1,53 +1,67 @@
 // Цветовые токены темы. Значения — CSS custom properties, поэтому их можно
 // менять во время выполнения (переключение темы) без пересборки стилей.
+//
+// Эстетика — неоновый киберпанк (ночной город «Бегущего по лезвию 2049»):
+// тёмный фиолетово-синий фон, неоновые розовый, фиолетовый и голубой.
+// Тёмная тема — по умолчанию: неон светится только на тёмном фоне.
+// Светлая — «город днём», включается через data-theme="light" (переключатель — шаг 7).
+// Все пары текст / фон проверены на контраст WCAG AA (≥ 4.5).
 :root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0b0716;
+  --color-bg-elevated: #150f2a;
+  --color-bg-hover: #1e1640;
+  --color-text: #efeaff;
+  --color-text-secondary: #a59cc9;
+  --color-border: #2c2152;
+  --color-accent: #ff3ecf;
+  --color-accent-hover: #ff7ae0;
+  --color-accent-contrast: #0b0716;
+  --color-neon-purple: #9d5cff;
+  --color-neon-blue: #3fd8ff;
+  --color-danger: #ff5c7a;
+  --color-danger-bg: #3a1026;
+  --color-overlay: rgb(5 3 12 / 70%);
+  --color-skeleton: #1e1640;
+
+  --gradient-neon: linear-gradient(90deg, #ff3ecf, #9d5cff 50%, #3fd8ff);
+  --glow-accent: 0 0 6px rgb(255 62 207 / 60%), 0 0 18px rgb(255 62 207 / 35%);
+  --glow-text: 0 0 8px rgb(255 62 207 / 55%);
+  // Для SVG и текста с градиентом: text-shadow на них не работает, drop-shadow — по форме букв.
+  --glow-filter: drop-shadow(0 0 10px rgb(157 92 255 / 50%));
+  // Неоновая дымка над городом: фиолетовая и розовая сверху, голубая снизу.
+  --bg-haze:
+    radial-gradient(60rem 40rem at 10% -10%, rgb(157 92 255 / 18%), transparent 60%),
+    radial-gradient(50rem 35rem at 100% 0%, rgb(255 62 207 / 12%), transparent 60%),
+    radial-gradient(60rem 40rem at 50% 120%, rgb(63 216 255 / 10%), transparent 60%);
+}
+
 [data-theme='light'] {
-  --color-bg: #ffffff;
-  --color-bg-elevated: #f7f6f4;
-  --color-bg-hover: #efeeec;
-  --color-text: #171412;
-  --color-text-secondary: #6f6a65;
-  --color-border: #e3e0db;
-  --color-accent: #8a3b2b;
-  --color-accent-hover: #732f22;
+  color-scheme: light;
+
+  --color-bg: #f7f4ff;
+  --color-bg-elevated: #efe9ff;
+  --color-bg-hover: #e6ddff;
+  --color-text: #160d2e;
+  --color-text-secondary: #5a4d85;
+  --color-border: #dcd2f7;
+  --color-accent: #c0157f;
+  --color-accent-hover: #9c0f67;
   --color-accent-contrast: #ffffff;
+  --color-neon-purple: #6a2ee0;
+  --color-neon-blue: #0a6fa8;
   --color-danger: #b3261e;
   --color-danger-bg: #fbeae9;
-  --color-overlay: rgb(23 20 18 / 55%);
-  --color-skeleton: #eae7e2;
-}
+  --color-overlay: rgb(22 13 46 / 55%);
+  --color-skeleton: #e6ddff;
 
-[data-theme='dark'] {
-  --color-bg: #17130f;
-  --color-bg-elevated: #221d18;
-  --color-bg-hover: #2b241d;
-  --color-text: #f3efe9;
-  --color-text-secondary: #a89f95;
-  --color-border: #382f27;
-  --color-accent: #e08a6f;
-  --color-accent-hover: #eba187;
-  --color-accent-contrast: #17130f;
-  --color-danger: #ff8a80;
-  --color-danger-bg: #3a1f1c;
-  --color-overlay: rgb(0 0 0 / 65%);
-  --color-skeleton: #2b241d;
-}
-
-@media (prefers-color-scheme: dark) {
-  // Подстраховка до срабатывания скрипта инициализации темы (см. ThemeInitScript).
-  :root:not([data-theme]) {
-    --color-bg: #17130f;
-    --color-bg-elevated: #221d18;
-    --color-bg-hover: #2b241d;
-    --color-text: #f3efe9;
-    --color-text-secondary: #a89f95;
-    --color-border: #382f27;
-    --color-accent: #e08a6f;
-    --color-accent-hover: #eba187;
-    --color-accent-contrast: #17130f;
-    --color-danger: #ff8a80;
-    --color-danger-bg: #3a1f1c;
-    --color-overlay: rgb(0 0 0 / 65%);
-    --color-skeleton: #2b241d;
-  }
+  --gradient-neon: linear-gradient(90deg, #c0157f, #6a2ee0 50%, #0a6fa8);
+  --glow-accent: 0 0 12px rgb(192 21 127 / 25%);
+  --glow-text: none;
+  --glow-filter: none;
+  --bg-haze:
+    radial-gradient(60rem 40rem at 10% -10%, rgb(106 46 224 / 10%), transparent 60%),
+    radial-gradient(50rem 35rem at 100% 0%, rgb(192 21 127 / 8%), transparent 60%);
 }

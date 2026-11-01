@@ -56,8 +56,12 @@
     position: sticky;
     top: 0;
     z-index: $z-header;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    // Полупрозрачная шапка: при прокрутке сквозь неё видна размытая дымка и картины.
+    background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    backdrop-filter: blur(12px);
+    // Неоновая линия: розовый → фиолетовый → голубой.
+    border-bottom: 1px solid transparent;
+    border-image: var(--gradient-neon) 1;
 
     .inner {
       @include container;
@@ -86,6 +90,7 @@
           .mark {
             flex-shrink: 0;
             color: var(--color-accent);
+            filter: var(--glow-filter);
           }
         }
 
@@ -96,6 +101,18 @@
             display: flex;
             align-items: center;
             gap: 24px;
+          }
+
+          a {
+            color: var(--color-text-secondary);
+            transition:
+              color 0.2s ease,
+              text-shadow 0.2s ease;
+
+            &:hover {
+              color: var(--color-accent);
+              text-shadow: var(--glow-text);
+            }
           }
         }
       }
