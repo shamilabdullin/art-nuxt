@@ -1,13 +1,17 @@
 // GET /api/artworks?limit=12&page=1 — список картин (BFF над artic.edu: браузер туда не пускают).
 
-import { aicFetch } from '~~/server/utils/aic'
+const PUBLIC_DOMAIN_WITH_IMAGE = {
+  query: {
+    bool: { must: [{ term: { is_public_domain: true } }, { exists: { field: 'image_id' } }] },
+  },
+}
 
-function parsePositiveInt(value: unknown, fallback: number, max = Infinity): number {
+function parsePositiveInt(name: string, value: unknown, fallback: number, max = Infinity): number {
   if (value === '' || typeof value === 'undefined') return fallback
 
   const number = Number(value)
   if (number < 1 || number > max || !Number.isInteger(number)) {
-    throw createError({ status: 400, statusText: 'some error' })
+    throw createError({ status: 400, statusText: `Invalid ${name} expected a positive integer` })
   }
 
   return number
@@ -15,29 +19,31 @@ function parsePositiveInt(value: unknown, fallback: number, max = Infinity): num
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
-  const limit = parsePositiveInt(query.limit, 12, 100)
-  const page = parsePositiveInt(query.page, 1, 10)
+  const limit = parsePositiveInt('limit', query.limit, 12, 100)
+  const page = parsePositiveInt('page', query.page, 1)
 
-  // TODO 1. Параметры: getQuery(event) → limit (целое 1–100, по умолчанию 12), page (целое ≥ 1, по умолчанию 1).
-  //         Невалидные → throw createError({ status: 400, statusText: '…' })
+  if (page * limit > AIC_MAX_RESULTS)
+    throw createError({
+      status: 400,
+      statusText: `page * limit must not exceed ${AIC_MAX_RESULTS}`,
+    })
 
   try {
     const response = await aicFetch<ApiListResponse<ArtworkSummary>>('artworks/search', {
-      query: { fields: ARTWORK_SUMMARY_FIELDS, limit: limit, page: page, params: {} },
+      query: {
+        fields: ARTWORK_SUMMARY_FIELDS,
+        limit,
+        page,
+        params: JSON.stringify(PUBLIC_DOMAIN_WITH_IMAGE),
+      },
     })
 
     return {
       artworks: response.data,
       page: response.pagination.current_page,
-      totalPages: response.pagination.total_pages,
+      totalPages: Math.min(response.pagination.total_pages, Math.floor(AIC_MAX_RESULTS / limit)),
     }
-  } catch (e) {
-    throw createError({ status: 503, statusText: '502 error' })
+  } catch {
+    throw createError({ status: 502, statusText: 'Art Institute API error' })
   }
-
-  // TODO 2. Запрос: $fetch<ApiListResponse<ArtworkSummary>>('artworks/search', { … })
-  //         baseURL, headers с AIC-User-Agent, query: fields, limit, page, params (фильтр — JSON-строкой).
-  //         Ошибка artic.edu → throw createError({ status: 502, statusText: '…' })
-
-  // TODO 3. Вернуть то, что нужно интерфейсу (главной — массив, списку в шаге 4 — ещё и пагинация).
 })
