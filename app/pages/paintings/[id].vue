@@ -9,6 +9,11 @@
 
   const artwork = computed(() => data.value?.data)
 
+  const imageUrl = computed(() => {
+    if (artwork.value) return getArtworkImageUrl(artwork.value.image_id, 'full')
+    return null
+  })
+
   const metaRows = computed(() => {
     if (artwork.value) return buildMetaRows(artwork.value)
     return []
@@ -19,7 +24,13 @@
   <div v-if="artwork" class="wrapper">
     <div class="imageColumn">
       <div class="imageWrapper">
-        <!-- <img class="image" /> -->
+        <img
+          v-if="imageUrl"
+          :src="imageUrl"
+          :alt="artwork.title"
+          class="image"
+          fetchpriority="high"
+        />
       </div>
     </div>
 
@@ -86,6 +97,10 @@
         border-radius: $radius-lg;
 
         .image {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
           object-fit: contain;
         }
       }
