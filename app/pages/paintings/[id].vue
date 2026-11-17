@@ -2,12 +2,15 @@
   const route = useRoute()
   const id = computed(() => route.params.id)
 
-  const { data } = await useFetch<ApiSingleResponse<ArtworkDetails>>(() => `artworks/${id.value}`, {
-    baseURL: API_BASE_URL,
-    query: { fields: ARTWORK_DETAILS_FIELDS },
-  })
+  const { data: artwork, error } = await useFetch(() => `/api/artworks/${id.value}`)
 
-  const artwork = computed(() => data.value?.data)
+  if (error.value) {
+    throw createError({
+      status: error.value.status,
+      statusText: error.value.statusText,
+      fatal: true,
+    })
+  }
 
   const imageUrl = computed(() => {
     if (artwork.value) return getArtworkImageUrl(artwork.value.image_id, 'full')
@@ -41,7 +44,7 @@
         <p v-if="artwork.artist_title" class="subtitle">
           <NuxtLink
             v-if="artwork.artist_id"
-            :to="`/artists/${artwork?.artist_id}`"
+            :to="`/artists/${artwork.artist_id}`"
             class="artistLink"
             >{{ artwork.artist_title }}</NuxtLink
           >
