@@ -6,17 +6,6 @@ const PUBLIC_DOMAIN_WITH_IMAGE = {
   },
 }
 
-function parsePositiveInt(name: string, value: unknown, fallback: number, max = Infinity): number {
-  if (value === '' || typeof value === 'undefined') return fallback
-
-  const number = Number(value)
-  if (number < 1 || number > max || !Number.isInteger(number)) {
-    throw createError({ status: 400, statusText: `Invalid ${name} expected a positive integer` })
-  }
-
-  return number
-}
-
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const limit = parsePositiveInt('limit', query.limit, 12, 100)
