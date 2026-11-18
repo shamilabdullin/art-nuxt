@@ -1,5 +1,8 @@
 <script setup lang="ts">
-  useHead({ titleTemplate: (title) => (title ? `${title} · Art` : 'Art') })
+  const appConfig = useAppConfig()
+  useHead({
+    titleTemplate: (title) => (title ? `${title} · ${appConfig.site.name}` : appConfig.site.name),
+  })
 </script>
 
 <template>

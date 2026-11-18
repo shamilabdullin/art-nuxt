@@ -1,6 +1,10 @@
+<script setup lang="ts">
+  const appConfig = useAppConfig()
+</script>
+
 <template>
   <section class="hero">
-    <h1 class="title">Art — галерея мирового искусства</h1>
+    <h1 class="title">{{ appConfig.site.name }} — галерея мирового искусства</h1>
     <p class="description">
       Онлайн-галерея произведений искусства на основе коллекции Art Institute of Chicago. Более
       130&nbsp;000 произведений в общественном достоянии.
