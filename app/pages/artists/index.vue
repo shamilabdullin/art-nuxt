@@ -11,6 +11,8 @@
     <div v-if="data" class="grid">
       <ArtistListItem v-for="artist in data.artists" :key="artist.id" :artist="artist" />
     </div>
+
+    <UiPagination v-if="data" :current-page="page" :total-pages="data.totalPages" />
   </div>
 </template>
 
