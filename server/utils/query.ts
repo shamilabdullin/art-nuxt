@@ -13,3 +13,5 @@ export function parsePositiveInt(
 
   return number
 }
+
+export const POSITIVE_INT_ID = /^[1-9]\d*$/

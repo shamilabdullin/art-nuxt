@@ -1,13 +1,12 @@
 // GET /api/artworks/:id — одна картина (BFF над artic.edu: браузер туда не пускают).
 
 import { FetchError } from 'ofetch'
-
-const ARTWORK_ID_PATTERN = /^[1-9]\d*$/
+import { POSITIVE_INT_ID } from '~~/server/utils/query'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
 
-  if (!id || !ARTWORK_ID_PATTERN.test(id)) {
+  if (!id || !POSITIVE_INT_ID.test(id)) {
     throw createError({ status: 404, statusText: 'Artwork not found' })
   }
 

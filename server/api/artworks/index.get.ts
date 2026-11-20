@@ -1,15 +1,17 @@
 // GET /api/artworks?limit=12&page=1 — список картин (BFF над artic.edu: браузер туда не пускают).
 
-const PUBLIC_DOMAIN_WITH_IMAGE = {
-  query: {
-    bool: { must: [{ term: { is_public_domain: true } }, { exists: { field: 'image_id' } }] },
-  },
-}
-
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const limit = parsePositiveInt('limit', query.limit, 12, 100)
   const page = parsePositiveInt('page', query.page, 1)
+  const artistId =
+    query.artistId === undefined ? undefined : parsePositiveInt('artistId', query.artistId, 1)
+
+  const must: Record<string, unknown>[] = [
+    { term: { is_public_domain: true } },
+    { exists: { field: 'image_id' } },
+  ]
+  if (artistId) must.push({ term: { artist_id: artistId } })
 
   if (page * limit > AIC_MAX_RESULTS)
     throw createError({
@@ -23,7 +25,7 @@ export default defineEventHandler(async (event) => {
         fields: ARTWORK_SUMMARY_FIELDS,
         limit,
         page,
-        params: JSON.stringify(PUBLIC_DOMAIN_WITH_IMAGE),
+        params: JSON.stringify({ query: { bool: { must } } }),
       },
     })
 
